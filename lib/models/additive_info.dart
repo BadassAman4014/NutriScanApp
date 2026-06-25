@@ -1,0 +1,113 @@
+enum AdditiveRisk { safe, moderate, concern }
+
+class AdditiveInfo {
+  final String code;
+  final String name;
+  final String function;
+  final String what;
+  final String why;
+  final String safety;
+  final AdditiveRisk risk;
+  const AdditiveInfo({
+    required this.code,
+    required this.name,
+    required this.function,
+    required this.what,
+    required this.why,
+    required this.safety,
+    required this.risk,
+  });
+}
+
+const Map<String, AdditiveInfo> kAdditives = {
+  'e100': AdditiveInfo(code:'E100', name:'Curcumin', function:'Colour',
+      what:'Yellow pigment from turmeric root.',
+      why:'Provides a yellow to orange colour in food.',
+      safety:'Considered safe at normal food levels. May interact with blood thinners in high doses.',
+      risk: AdditiveRisk.safe),
+  'e102': AdditiveInfo(code:'E102', name:'Tartrazine', function:'Colour',
+      what:'Synthetic azo dye, produces yellow-orange colour.',
+      why:'Cheap colouring for snacks, drinks, and sweets.',
+      safety:'Linked to hyperactivity in children in some studies. Banned in Norway and Austria. Requires a warning label in the EU.',
+      risk: AdditiveRisk.concern),
+  'e110': AdditiveInfo(code:'E110', name:'Sunset Yellow FCF', function:'Colour',
+      what:'Orange-yellow azo dye.',
+      why:'Colouring for beverages, cereals, and ice cream.',
+      safety:'Part of the "Southampton Six" — EU requires warning label. Some allergy risk.',
+      risk: AdditiveRisk.concern),
+  'e120': AdditiveInfo(code:'E120', name:'Cochineal / Carmine', function:'Colour',
+      what:'Red dye derived from crushed scale insects.',
+      why:'Natural red colouring.',
+      safety:'Generally safe; concern for those with insect allergies or on vegan/kosher diets.',
+      risk: AdditiveRisk.moderate),
+  'e129': AdditiveInfo(code:'E129', name:'Allura Red AC', function:'Colour',
+      what:'Synthetic red azo dye.',
+      why:'Common red colouring in candies and drinks.',
+      safety:'Southampton Six member. EU warning label required. Generally approved by FDA.',
+      risk: AdditiveRisk.concern),
+  'e200': AdditiveInfo(code:'E200', name:'Sorbic Acid', function:'Preservative',
+      what:'Naturally occurring organic acid.',
+      why:'Prevents mould and yeast growth.',
+      safety:'Generally regarded as safe (GRAS). Rarely causes skin sensitivity.',
+      risk: AdditiveRisk.safe),
+  'e211': AdditiveInfo(code:'E211', name:'Sodium Benzoate', function:'Preservative',
+      what:'Sodium salt of benzoic acid.',
+      why:'Extends shelf life in acidic foods and drinks.',
+      safety:'Combined with vitamin C (E300) it can form benzene, a carcinogen. Linked to hyperactivity in some children.',
+      risk: AdditiveRisk.concern),
+  'e250': AdditiveInfo(code:'E250', name:'Sodium Nitrite', function:'Preservative / Colour fixative',
+      what:'Inorganic salt used in cured meats.',
+      why:'Prevents botulism and maintains red/pink colour in meat.',
+      safety:'WHO classifies processed meats as Group 1 carcinogen. Nitrites are a contributing factor. Intake should be limited.',
+      risk: AdditiveRisk.concern),
+  'e300': AdditiveInfo(code:'E300', name:'Ascorbic Acid (Vitamin C)', function:'Antioxidant',
+      what:'Synthetic or natural vitamin C.',
+      why:'Prevents oxidation, preserves colour and flavour.',
+      safety:'Safe and beneficial at food levels. Excess intake may cause digestive issues.',
+      risk: AdditiveRisk.safe),
+  'e330': AdditiveInfo(code:'E330', name:'Citric Acid', function:'Acidity regulator',
+      what:'Organic acid naturally found in citrus fruits.',
+      why:'Adds tartness, preserves freshness, balances pH.',
+      safety:'Generally regarded as safe. Dental erosion at very high consumption.',
+      risk: AdditiveRisk.safe),
+  'e407': AdditiveInfo(code:'E407', name:'Carrageenan', function:'Thickener / Gelling agent',
+      what:'Polysaccharide extracted from red seaweed.',
+      why:'Provides creamy texture in dairy and plant-based products.',
+      safety:'Degraded carrageenan (poligeenan) is inflammatory — food grade is different but some researchers remain cautious.',
+      risk: AdditiveRisk.moderate),
+  'e412': AdditiveInfo(code:'E412', name:'Guar Gum', function:'Thickener',
+      what:'Derived from guar beans.',
+      why:'Thickens and stabilises products without changing taste.',
+      safety:'Generally safe. Very high doses may cause digestive bloating.',
+      risk: AdditiveRisk.safe),
+  'e415': AdditiveInfo(code:'E415', name:'Xanthan Gum', function:'Thickener / Stabiliser',
+      what:'Produced by bacterial fermentation of sugars.',
+      why:'Improves texture and prevents separation.',
+      safety:'Generally regarded as safe. Those with corn allergy should note it may be corn-derived.',
+      risk: AdditiveRisk.safe),
+  'e420': AdditiveInfo(code:'E420', name:'Sorbitol', function:'Sweetener / Humectant',
+      what:'Sugar alcohol found naturally in fruits.',
+      why:'Sweetens without raising blood sugar as sharply; retains moisture.',
+      safety:'Safe at moderate levels. Excessive consumption causes laxative effect.',
+      risk: AdditiveRisk.moderate),
+  'e471': AdditiveInfo(code:'E471', name:'Mono- and Diglycerides of Fatty Acids', function:'Emulsifier',
+      what:'Fat-derived emulsifiers.',
+      why:'Keeps water and fat mixed evenly (e.g. in bread, ice cream).',
+      safety:'Generally safe. May contain trans fatty acids depending on source.',
+      risk: AdditiveRisk.moderate),
+  'e500': AdditiveInfo(code:'E500', name:'Sodium Carbonates', function:'Raising agent / Acidity regulator',
+      what:'Sodium carbonate and bicarbonate.',
+      why:'Leavening agent in baked goods; regulates acidity.',
+      safety:'Safe in food quantities. Baking soda is E500ii.',
+      risk: AdditiveRisk.safe),
+  'e621': AdditiveInfo(code:'E621', name:'Monosodium Glutamate (MSG)', function:'Flavour enhancer',
+      what:'Sodium salt of glutamic acid, an amino acid.',
+      why:'Intensifies savoury (umami) taste.',
+      safety:'"Chinese Restaurant Syndrome" is not substantiated by science. MSG is GRAS. High sodium contributes to blood pressure if overconsumed.',
+      risk: AdditiveRisk.moderate),
+};
+
+AdditiveInfo? lookupAdditive(String token) {
+  final key = token.trim().toLowerCase().replaceAll(' ', '');
+  return kAdditives[key];
+}
